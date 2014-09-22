@@ -1,0 +1,72 @@
+\ProvidesPackage{wcmath}
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{amsthm}
+
+% aliases for blackboard, calligraphic fonts
+\newcommand{\mB}{\mathbb}
+\newcommand{\mC}{\mathcal}
+%\renewcommand{\mapsto}{\longmapsto}
+
+% general
+\newcommand{\mean}{\overline}
+\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}} % include boldsymbol for Greek
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% asymptotic notation
+\newcommand{\bigO}{\mC O}
+\newcommand{\bigTheta}{\Theta}
+
+% statistics: expected value, variance
+\DeclareMathOperator{\expect}{\mathbb{E}}
+\DeclareMathOperator{\var}{Var}
+
+% linear algebra
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\nullspace}{\mathcal{N}}
+\newcommand{\mat}[1]{\boldsymbol{\mathbf{#1}}} % analogous to vec
+\newcommand{\basis}[1]{\vec e_{#1}} % basis vector
+\newcommand{\T}[1]{{#1}^T\!} % matrix transpose
+
+% optimization: minimize, subject to
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator*{\subjto}{subject\ to}
+
+% optimization environment for proper spacing
+% usage, in text mode:
+% \begin{optimization}
+%   \minimize_{x, y} & f(x, y) \\
+%   \subjto & g(x) = 0 \\
+%           & h(y) = 0
+% \end{optimization}
+\RequirePackage{array}
+\newcolumntype{R}{>{\displaystyle}r}
+\newcolumntype{L}{>{\displaystyle}l}
+\newenvironment{optimization}{%
+  \[%
+  \renewcommand{\arraystretch}{1.5}%
+  \begin{array}{R@{\quad}L}%
+}{%
+  \end{array}%
+  \]%
+}
+
+% the end of proofs (in theorem, use qedhere instead, if at all)
+\newcommand*{\proofdone}[0]{\hfill$\square$}
+
+% absolute value and norm
+\RequirePackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\let\old@abs\abs
+\def\abs{\@ifstar{\old@abs}{\old@abs*}}
+
+\let\old@norm\norm
+\def\norm{\@ifstar{\old@norm}{\old@norm*}}

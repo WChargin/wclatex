@@ -1,0 +1,97 @@
+% Load this package last! It includes hyperref.
+\ProvidesPackage{wcsetup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package option setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% option to load wcmath (default: true)
+\newif\if@wc@loadmath
+\DeclareOption{math}{\@wc@loadmathtrue}
+\DeclareOption{no-math}{\@wc@loadmathfalse}
+\ExecuteOptions{math}
+
+% option to load wclistings (default: false)
+\newif\if@wc@loadlistings
+\DeclareOption{listings}{\@wc@loadlistingstrue}
+\DeclareOption{no-listings}{\@wc@loadlistingsfalse}
+\ExecuteOptions{no-listings}
+
+% option to load wcessay (default: false)
+\newif\if@wc@loadessay
+\DeclareOption{essay}{\@wc@loadessaytrue}
+\DeclareOption{no-essay}{\@wc@loadessayfalse}
+\ExecuteOptions{no-essay}
+
+% option to pass hidelinks to hyperref (default: false)
+\newif\if@wc@hidelinks
+\DeclareOption{hidelinks}{\@wc@hidelinkstrue}
+\DeclareOption{no-hidelinks}{\@wc@hidelinksfalse}
+\ExecuteOptions{no-hidelinks}
+
+% option to pass binary-units to siunitx (default: true)
+\newif\if@wc@binaryunits
+\DeclareOption{binary-units}{\@wc@binaryunitstrue}
+\DeclareOption{no-binary-units}{\@wc@binaryunitsfalse}
+\ExecuteOptions{binary-units}
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package loading
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Load prerequisite packages, if any
+\if@wc@loadmath
+  \RequirePackage{wcmath}
+\fi
+\if@wc@loadlistings
+  \RequirePackage{wclistings}
+\fi
+\if@wc@loadessay
+  \RequirePackage{wcessay}
+\fi
+
+% Load siunitx with options according to \if@wc@binaryunits
+\if@wc@binaryunits
+  \RequirePackage[binary-units]{siunitx}
+\else
+  \RequirePackage{siunitx}
+\fi
+
+% Another custom commands package
+\RequirePackage{wccmd}
+
+% more standard packages
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+
+% varioref, hyperref, cleveref
+\RequirePackage{varioref}
+\if@wc@hidelinks
+  \RequirePackage[hidelinks]{hyperref}
+\else
+  \RequirePackage{hyperref}
+  \hypersetup{%
+    colorlinks,
+    linkcolor={green!60!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+  }
+\fi
+\RequirePackage{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theorem definitions (must come after cleveref is loaded!)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Note: theorem definitions must come after cleveref is loaded!
+\@ifpackageloaded{amsthm}{%
+  % All theorem types should piggyback on [theorem] for consistent numbering.
+  \newtheorem{theorem}{Theorem}%
+  \newtheorem{lemma}[theorem]{Lemma}%
+  %
+  \newtheorem{definition}{Definition}%
+}{% else
+  \relax%
+}

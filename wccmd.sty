@@ -1,0 +1,27 @@
+\ProvidesPackage{wccmd}
+
+% Definitions and such.
+% Usage:
+%  A \noun{foobar} is a rare species of...
+\newcommand{\noun}[1]{\textbf{#1}}
+
+% Referring to words as words.
+% Usage:
+%  When we say \word{foobar}, we really mean...
+%  The word \word{quxbaz} is unique in its...
+\newcommand{\word}[1]{\emph{#1}}
+
+% Using foreign words.
+% Usage:
+%  The word \word{sincere} comes from the Latin \foreignword{sin cera}...
+\newcommand{\foreignword}[1]{\emph{#1}}
+
+% Referring to literary works.
+% Usage:
+%  Shakespeare's \work{Hamlet} is the classic...
+\newcommand{\work}[1]{\emph{#1}}
+
+% Course number and assignment title combo.
+% Usage:
+%  \title{\coursetitle{CSC 101}{Homework 1}}
+\newcommand{\coursetitle}[2]{#1: #2}
