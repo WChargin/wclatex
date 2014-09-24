@@ -25,3 +25,12 @@
 % Usage:
 %  \title{\coursetitle{CSC 101}{Homework 1}}
 \newcommand{\coursetitle}[2]{#1: #2}
+
+% Simple note header setup.
+% Usage:
+%   \classnotes{1 January 1970}
+\newcommand{\classnotes}[1]{%
+  \title{Class Notes: #1}%
+  \author{William Chargin}%
+  \date{}% % omit superfluous date
+}
