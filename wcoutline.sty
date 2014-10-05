@@ -1,0 +1,23 @@
+\ProvidesPackage{wcoutline}
+
+\RequirePackage{wccmd}
+
+\RequirePackage{xstring} % for IfSubStr, StrRight
+
+\RequirePackage{outlines}
+\RequirePackage{enumitem}
+
+\setenumerate[1]{label=\arabic*.}
+\setenumerate[2]{label=\Alph*.}
+\setenumerate[3]{label=\Roman*.}
+\setenumerate[4]{label=\alph*.}
+\setenumerate[5]{label=\roman*.}
+
+\newcommand{\summary}[2]{%
+  \textsc{#1%
+    % extract last character; add period if not punctuation
+    \StrRight{#1}{1}[\@@lastchar]\IfSubStr{.?!'}{\@@lastchar}\relax{.}%
+  } #2\unskip%
+}
+
+\newenvironment{wcoutline}{\begin{outline}[enumerate]}{\end{outline}}

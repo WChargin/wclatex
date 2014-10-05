@@ -23,6 +23,12 @@
 \DeclareOption{no-essay}{\@wc@loadessayfalse}
 \ExecuteOptions{no-essay}
 
+% option to load wcoutline (default: false)
+\newif\if@wc@loadoutline
+\DeclareOption{outline}{\@wc@loadoutlinetrue}
+\DeclareOption{no-outline}{\@wc@loadoutlinefalse}
+\ExecuteOptions{no-outline}
+
 % option to pass hidelinks to hyperref (default: false)
 \newif\if@wc@hidelinks
 \DeclareOption{hidelinks}{\@wc@hidelinkstrue}
@@ -50,6 +56,9 @@
 \fi
 \if@wc@loadessay
   \RequirePackage{wcessay}
+\fi
+\if@wc@loadoutline
+  \RequirePackage{wcoutline}
 \fi
 
 % Load siunitx with options according to \if@wc@binaryunits
