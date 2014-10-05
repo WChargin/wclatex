@@ -41,6 +41,12 @@
 \DeclareOption{no-binary-units}{\@wc@binaryunitsfalse}
 \ExecuteOptions{binary-units}
 
+% option to pass per-mode=symbol to siunitx (default: true)
+\newif\if@wc@writeper
+\DeclareOption{write-per}{\@wc@writepertrue}
+\DeclareOption{no-write-per}{\@wc@writeperfalse}
+\ExecuteOptions{write-per}
+
 \ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,10 +68,12 @@
 \fi
 
 % Load siunitx with options according to \if@wc@binaryunits
+\RequirePackage{siunitx}
 \if@wc@binaryunits
-  \RequirePackage[binary-units]{siunitx}
-\else
-  \RequirePackage{siunitx}
+  \sisetup{binary-units}
+\fi
+\if@wc@writeper
+  \sisetup{per-mode=symbol}
 \fi
 
 % Another custom commands package
