@@ -11,7 +11,6 @@
 %\renewcommand{\mapsto}{\longmapsto}
 
 % general
-\newcommand{\mean}{\overline}
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}} % include boldsymbol for Greek
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
@@ -22,8 +21,22 @@
 % statistics: expected value, variance, median
 \DeclareMathOperator{\expect}{\mathbb{E}}
 \DeclareMathOperator{\var}{Var}
+\newcommand{\mean}{\bar}
+\newcommand{\widemean}{\overline}
 \newcommand{\median}{\tilde}
 \newcommand{\widemedian}{\widetilde}
+\newcommand{\trimmed}[1]{\operatorname{tr}(#1)}
+
+% statistics: distributions
+\newcommand{\@distribution@name}[1]{\mathrm{#1}}
+\newcommand{\Exp}{\@distribution@name{Exp}} % exponential
+\newcommand{\Bin}{\@distribution@name{Bin}} % binomial
+\newcommand{\Pois}{\@distribution@name{Pois}} % Poisson
+\newcommand{\Nor}{\@distribution@name{\mathcal{N}}} % normal
+\newcommand{\Lgn}{\@distribution@name{Log}\text{-}\Nor} % lognormal
+\newcommand{\Unif}{\@distribution@name{\mathcal{U}}} % uniform
+\newcommand{\Chisq}{\@distribution@name{\chi}^2} % chi-squared
+\newcommand{\Wbl}{\@distribution@name{Weibull}} % Weibull
 
 % linear algebra
 \DeclareMathOperator{\rank}{rank}
