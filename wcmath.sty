@@ -1,5 +1,6 @@
 \ProvidesPackage{wcmath}
 
+% standard dependencies
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsfonts}
@@ -10,22 +11,34 @@
 \newcommand{\mC}{\mathcal}
 %\renewcommand{\mapsto}{\longmapsto}
 
-% general
+% vectors: bold, not arrow (but \arrowvec kept in case)
+\let\arrowvec\vec
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}} % include boldsymbol for Greek
-\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% for use in align*, gather*, etc.; opposite of \nonumber
+\newcommand{\numberthis}{\addtocounter{equation}{1}\tag{\theequation}}
 
 % asymptotic notation
 \newcommand{\bigO}{\mC O}
 \newcommand{\bigTheta}{\Theta}
 
 % statistics: expected value, variance, median
-\DeclareMathOperator{\expect}{\mathbb{E}}
+\DeclareMathOperator{\expect}{E}
 \DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\prob}{P}
 \newcommand{\mean}{\bar}
 \newcommand{\widemean}{\overline}
 \newcommand{\median}{\tilde}
 \newcommand{\widemedian}{\widetilde}
 \newcommand{\trimmed}[1]{\operatorname{tr}(#1)}
+\newcommand{\estimate}[1]{\widetilde{#1}}
+\newcommand{\stratified}[1]{\operatorname{str}}
+\newcommand{\given}{\mid}
+
+% statistics: sum of squared stuff
+\newcommand{\sumsquare}[1]{\mathrm{SS}_{\mathrm{#1}}}
+\newcommand{\SSresid}{\sumsquare{resid}}
+\newcommand{\SStotal}{\sumsquare{total}}
 
 % statistics: distributions
 \newcommand{\@distribution@name}[1]{\mathrm{#1}}
@@ -72,14 +85,14 @@
 % the end of proofs (in theorem, use qedhere instead, if at all)
 \newcommand*{\proofdone}[0]{\hfill$\square$}
 
-% absolute value and norm
+% absolute value and vector norm
 \RequirePackage{mathtools}
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
-% Swap the definition of \abs* and \norm*, so that \abs
-% and \norm resizes the size of the brackets, and the 
-% starred version does not.
+% Swap the definitions of \abs* and \norm* with their respective starred
+% variants, so that \abs and \norm resize delimiters, and the starred variants
+% do not.
 \let\old@abs\abs
 \def\abs{\@ifstar{\old@abs}{\old@abs*}}
 
