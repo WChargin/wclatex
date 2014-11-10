@@ -7,11 +7,6 @@
 \RequirePackage{outlines}
 \RequirePackage{enumitem}
 
-\setenumerate[1]{label=\arabic*.}
-\setenumerate[2]{label=\Alph*.}
-\setenumerate[3]{label=\Roman*.}
-\setenumerate[4]{label=\alph*.}
-\setenumerate[5]{label=\roman*.}
 
 \newcommand{\summary}[2]{%
   \textsc{#1%
@@ -20,4 +15,11 @@
   } #2\unskip%
 }
 
-\newenvironment{wcoutline}{\begin{outline}[enumerate]}{\end{outline}}
+\newcommand{\@outline@begin}{%
+  \setenumerate[1]{label=\Roman*.}
+  \setenumerate[2]{label=\Alph*.}
+  \setenumerate[3]{label=\arabic*.}
+  \setenumerate[4]{label=\alph*.}
+  \setenumerate[5]{label=\roman*.}
+}
+\newenvironment{wcoutline}{\begin{outline}[enumerate]\@outline@begin}{\end{outline}}
