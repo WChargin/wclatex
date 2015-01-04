@@ -29,3 +29,21 @@
 \algrenewcommand{\algorithmicensure}{\textbf{Output:}}
 \RequirePackage{float}
 \newfloat{algorithm}{t}{lop}
+
+% Commands for base representation
+
+%% Group digits in groups of four: adapted from http://tex.stackexchange.com/a/128527/37357
+\def\@groupsoffour#1{\xzz#1\relax\relax\relax\relax\relax}
+\def\xzz#1#2#3#4#5{#1#2#3#4%
+  \ifx\relax#5\else\,\expandafter\xzz
+\fi#5}
+
+%% Formatting commands
+\newcommand{\inbase}{\@ifstar\inbase@ungrouped\inbase@grouped}
+\newcommand{\inbase@grouped}[2]{{\begingroup\mathrm{\@groupsoffour{#1}}\endgroup}_{#2}}
+\newcommand{\inbase@ungrouped}[2]{{\begingroup\mathrm{#1}\endgroup}_{#2}}
+\newcommand{\DeclareBaseRepresentation}[2]{\newcommand{#1}[1]{\inbase{##1}{#2}}}
+\newcommand{\DeclareUngroupedBaseRepresentation}[2]{\newcommand{#1}[1]{\inbase*{##1}{#2}}}
+\DeclareBaseRepresentation{\binary}{2}
+\DeclareBaseRepresentation{\hex}{16}
+\DeclareUngroupedBaseRepresentation{\decimal}{10}
