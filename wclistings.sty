@@ -33,9 +33,9 @@
 % Commands for base representation
 
 %% Group digits in groups of four: adapted from http://tex.stackexchange.com/a/128527/37357
-\def\@groupsoffour#1{\xzz#1\relax\relax\relax\relax\relax}
-\def\xzz#1#2#3#4#5{#1#2#3#4%
-  \ifx\relax#5\else\,\expandafter\xzz
+\def\@groupsoffour#1{\@@groupsoffour#1\relax\relax\relax\relax\relax}
+\def\@@groupsoffour#1#2#3#4#5{#1#2#3#4%
+  \ifx\relax#5\else\,\expandafter\@@groupsoffour
 \fi#5}
 
 %% Formatting commands
