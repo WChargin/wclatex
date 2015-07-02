@@ -1,0 +1,38 @@
+\ProvidesPackage{hnrs149}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package option setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% option for web documents (default: true)
+\newif\if@forweb
+\DeclareOption{web}{\@forwebtrue}
+\DeclareOption{print}{\@forwebfalse}
+\ExecuteOptions{web}
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package loading
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Appropriate font
+\RequirePackage{helvet}
+\if@forweb
+  \RequirePackage{sfmath}
+  \renewcommand{\familydefault}{phv} % PostScript Helvetica
+\else
+  \RequirePackage{mathptmx}
+\fi
+
+% Single spacing within paragraphs, double spacing between
+\RequirePackage{parskip}
+% (except for lists)
+\RequirePackage{enumitem}
+\setlist{noitemsep}
+
+% Flush-left justification
+\raggedright
+
+% Minimum 1-inch margins at all edges
+\RequirePackage[margin=1in]{geometry}

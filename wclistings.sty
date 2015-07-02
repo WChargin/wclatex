@@ -19,7 +19,7 @@
   escapebegin=\lst@commentstyle, % you need to set escapechar to use this
   captionpos=b,
   xleftmargin=0.7cm, xrightmargin=0.5cm,
-  lineskip=-0.3em,
+  %lineskip=-0.2em,
 }
 
 % Algorithm and pseudocode type setting
@@ -47,3 +47,5 @@
 \DeclareBaseRepresentation{\binary}{2}
 \DeclareBaseRepresentation{\hex}{16}
 \DeclareUngroupedBaseRepresentation{\decimal}{10}
+
+\newcommand{\hexaddr}[1]{\texttt{x#1}}

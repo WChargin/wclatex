@@ -15,12 +15,23 @@
 \let\arrowvec\vec
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}} % include boldsymbol for Greek
 
+% min, mid, and max for subscripts (not operators)
+\newcommand{\smin}{\mathrm{min}}
+\newcommand{\smid}{\mathrm{mid}}
+\newcommand{\smax}{\mathrm{max}}
+\newcommand{\stotal}{\mathrm{total}}
+
+% basic logic
+\newcommand{\suchthat}{\mathrel{\mathrm{s.t.}}}
+\newcommand{\then}{\colon} % \forall x \in A \then \exists y \in B \then P(x, y)
+
 % for use in align*, gather*, etc.; opposite of \nonumber
 \newcommand{\numberthis}{\addtocounter{equation}{1}\tag{\theequation}}
 
 % asymptotic notation
 \newcommand{\bigO}{\mC O}
 \newcommand{\bigTheta}{\Theta}
+\newcommand{\bigOmega}{\Omega}
 
 % statistics: expected value, variance, median
 \DeclareMathOperator{\expect}{E}
@@ -55,14 +66,67 @@
 % linear algebra
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\spn}{span}
-\DeclareMathOperator{\nullspace}{\mathcal{N}}
-\newcommand{\unitvec}[1]{\hat{#1}}
-\newcommand{\ivec}[1]{\unitvec{\imath}}
-\newcommand{\jvec}[1]{\unitvec{\jmath}}
-\newcommand{\kvec}[1]{\unitvec{k}}
+\DeclareMathOperator{\nullspace}{null}
+\newcommand{\unitvec}[1]{\vec{\hat{#1}}}
+\newcommand{\ivec}{\unitvec{\textbf{\i}}}
+\newcommand{\jvec}{\unitvec{\textbf{\j}}}
+\newcommand{\kvec}{\unitvec{k}}
 \newcommand{\mat}[1]{\boldsymbol{\mathbf{#1}}} % analogous to vec
 \newcommand{\basis}[1]{\vec e_{#1}} % basis vector
-\newcommand{\T}[1]{{#1}^T\!} % matrix transpose
+\newcommand{\T}[0]{^T\!} % matrix transpose
+
+% Augmented matrix environments.
+% Environment naming prepends 'a'; e.g.: augmented bmatrix -> abmatrix.
+% First and only environment parameter is the number of primary columns
+% (not counting the augmented column).
+% Example:
+% \begin{abmatrix}{n}
+%   a_{11} & \cdots & a_{1n} & b_1
+%   \vdots & \vdots & \vdots & \vdots
+%   a_{m1} & \cdots & a_{mn} & b_m
+% \end{abmatrix}
+% Nesting augmented matrices of different types is not supported.
+%
+
+%% Patch internal amsmath command to allow for more flexible matrices
+\renewcommand\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep%
+  \let\@ifnextchar\new@ifnextchar%
+  \array{#1}%
+}
+
+%% Define a general augmented environment
+%% Example usage: \begin{augmented}{bmatrix}{3} ... \end{augmented}
+\newenvironment{augmented}[3][1]%
+  {\def\augmented@supertype{#2}\expandafter\begin{\augmented@supertype}[*#3r|*#1c]}%
+  {\expandafter\end{\augmented@supertype}}
+
+%% Internal command to batch-create environments
+\newcommand{\wc@createaugmented}[1]{%
+  \newenvironment{a#1}[2][1]{\begin{augmented}[##1]{#1}{##2}}{\end{augmented}}%
+}
+\wc@createaugmented{matrix}
+\wc@createaugmented{pmatrix}
+\wc@createaugmented{bmatrix}
+\wc@createaugmented{Bmatrix}
+\wc@createaugmented{vmatrix}
+\wc@createaugmented{Vmatrix}
+
+% Shortcut for general augmented matrix
+\newcommand{\generalabmat}[2]{\begin{abmatrix}{1}#1&\vec{#2}\end{abmatrix}}
+\newcommand{\eyeabmat}[2]{\begin{abmatrix}{1}#1&I_{#2}\end{abmatrix}}
+
+% System of equations
+\newenvironment{systemed}{\left\{\begin{aligned}}{\end{aligned}\right.}
+\newenvironment{system}{\begin{equation*}\begin{systemed}}{\end{systemed}\end{equation*}\ignorespacesafterend}
+\newenvironment{rsystemed}{\left.\begin{aligned}}{\end{aligned}\right\}}
+\newenvironment{rsystem}{\begin{equation*}\begin{rsystemed}}{\end{rsystemed}\end{equation*}\ignorespacesafterend}
+
+% Subspaces
+\newcommand{\subspeq}{\mathrel{\overset{\circ}{\scriptstyle\subseteq}}}
+\newcommand{\subsp}{\mathrel{\overset{\circ}{\scriptstyle\subset}}}
+\newcommand{\nsubspeq}{\mathrel{\overset{\circ}{\scriptstyle\not\subseteq}}}
+\newcommand{\nsubsp}{\mathrel{\overset{\circ}{\scriptstyle\not\subset}}}
 
 % optimization: minimize, subject to
 \DeclareMathOperator*{\minimize}{minimize}
@@ -103,3 +167,41 @@
 
 \let\old@norm\norm
 \def\norm{\@ifstar{\old@norm}{\old@norm*}}
+
+% Propositional logic:
+% switch implies, iff, etc. from ==> to --> style arrows
+\newif\if@propositionallogic
+\@propositionallogicfalse
+\newcommand{\propositionallogicon}{%
+  \if@propositionallogic\else % do nothing if already set
+    \@propositionallogictrue
+    \global\let\old@logic@iff\iff
+    \global\let\old@logic@implies\implies
+    \global\let\old@logic@impliedby\impliedby
+    \def\implication@spacing{}% can change to \; if desired
+    \global\def\iff{\DOTSB\implication@spacing\leftrightarrow\implication@spacing}
+    \global\def\implies{\DOTSB\implication@spacing\rightarrow\implication@spacing}
+    \global\def\impliedby{\DOTSB\implication@spacing\leftarrow\implication@spacing}
+    \global\newcommand\lxor{\oplus}
+    \global\newcommand\ltrue{\mathbf{T}}
+    \global\newcommand\lfalse{\mathbf{F}}
+  \fi
+}
+\newcommand{\propositionallogicoff}{%
+  \if@propositionallogic % do nothing if not set
+    \@propositionallogicfalse
+    \global\let\iff\old@logic@iff
+    \global\let\implies\old@logic@implies
+    \global\let\impliedby\old@logic@impliedby
+    \global\let\lxor\undefined
+    \global\let\ltrue\undefined
+    \global\let\lfalse\undefined
+  \fi
+}
+
+% Set and function theory
+\newcommand\powerset{\mathcal{P}}
+\newcommand\unique{\mathrel{\exists!}}
+\newcommand\restrict[2]{\left.{#1}\right|_{#2}}
+\newcommand\inv{{-1}} % inverse function, as in f^\inv
+\newcommand\imf\underline % (pre)image function, as in \imf f : \powerset(A) \to \powerset(B)

@@ -47,6 +47,12 @@
 \DeclareOption{no-write-per}{\@wc@writeperfalse}
 \ExecuteOptions{write-per}
 
+% option to load lmodern (default: true)
+\newif\if@wc@lmodern
+\DeclareOption{lmodern}{\@wc@lmoderntrue}
+\DeclareOption{no-lmodern}{\@wc@lmodernfalse}
+\ExecuteOptions{lmodern}
+
 \ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,7 +61,7 @@
 
 % Font setup (some further packages rely on this)
 \RequirePackage[T1]{fontenc}
-\RequirePackage{lmodern}
+\if@wc@lmodern{\RequirePackage{lmodern}}\fi
 \RequirePackage{zi4}
 
 % Load prerequisite packages, if any
@@ -92,15 +98,15 @@
 % varioref, hyperref, cleveref
 \RequirePackage{varioref}
 \if@wc@hidelinks
-  \RequirePackage[hidelinks]{hyperref}
+\RequirePackage[hidelinks]{hyperref}
 \else
-  \RequirePackage{hyperref}
-  \hypersetup{%
-    colorlinks,
-    linkcolor={blue},
-    citecolor={blue},
-    urlcolor={blue}
-  }
+\RequirePackage{hyperref}
+\hypersetup{%
+  colorlinks,
+  linkcolor={blue},
+  citecolor={blue},
+  urlcolor={blue}
+}
 \fi
 \RequirePackage{cleveref}
 
@@ -113,8 +119,15 @@
   % All theorem types should piggyback on [theorem] for consistent numbering.
   \newtheorem{theorem}{Theorem}%
   \newtheorem{lemma}[theorem]{Lemma}%
+  \newtheorem{corollary}[theorem]{Corollary}%
   %
   \newtheorem{definition}{Definition}%
+  %
+  % Unnumbered versions
+  \newtheorem*{theorem*}{Theorem}
+  \newtheorem*{lemma*}{Lemma}%
+  \newtheorem*{corollary*}{Corollary}%
+  \newtheorem*{definition*}{Definition}%
 }{% else
   \relax%
 }

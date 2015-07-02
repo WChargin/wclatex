@@ -1,0 +1,8 @@
+\ProvidesPackage{wcessay}
+
+\RequirePackage{etoolbox}
+
+\newenvironment{prompt}[1][]%
+{\begin{quote}
+  \ifstrempty{#1}{\textbf{Prompt.}}{\textbf{Prompt (#1).}}~%
+}{\end{quote}}
