@@ -11,6 +11,14 @@
 \DeclareOption{no-math}{\@wc@loadmathfalse}
 \ExecuteOptions{math}
 
+% option to load wccat (default: false)
+\newif\if@wc@loadcat
+\DeclareOption{category}{\@wc@loadcattrue}
+\DeclareOption{categories}{\@wc@loadcattrue}
+\DeclareOption{no-category}{\@wc@loadcatfalse}
+\DeclareOption{no-categories}{\@wc@loadcatfalse}
+\ExecuteOptions{no-category}
+
 % option to load wclistings (default: false)
 \newif\if@wc@loadlistings
 \DeclareOption{listings}{\@wc@loadlistingstrue}
@@ -67,6 +75,9 @@
 % Load prerequisite packages, if any
 \if@wc@loadmath
   \RequirePackage{wcmath}
+\fi
+\if@wc@loadcat
+  \RequirePackage{wccat}
 \fi
 \if@wc@loadlistings
   \RequirePackage{wclistings}
