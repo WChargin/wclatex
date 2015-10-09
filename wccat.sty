@@ -1,6 +1,7 @@
 \ProvidesPackage{wccat}
 
 \RequirePackage{amsmath}
+\RequirePackage{graphicx}
 
 % category
 \newcommand{\cat}[1]{\mathsf{#1}}
@@ -9,3 +10,19 @@
 
 \newcommand{\Grp}{\cat{Grp}}
 \newcommand{\Set}{\cat{Set}}
+\newcommand{\Top}{\cat{Top}}
+
+\newcommand{\blank}{\_}
+
+\newcommand{\grop}{\cdot} % the group operation
+
+% natural transformation (\tau : S \naturalto T)
+% adapated from http://tex.stackexchange.com/a/141018/37357
+\DeclareRobustCommand{\naturalto}{%
+  \mathrel{\vbox{\offinterlineskip
+    \mathsurround=0pt
+    \ialign{\hfil##\hfil\cr
+      \!\normalfont\scalebox{1.2}{.}\cr
+      $\rightarrow$\cr}
+  }}%
+}

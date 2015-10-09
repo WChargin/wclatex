@@ -11,6 +11,13 @@
 \newcommand{\mC}{\mathcal}
 %\renewcommand{\mapsto}{\longmapsto}
 
+\newcommand{\R}{\mB{R}}
+\newcommand{\C}{\mB{C}}
+\newcommand{\Q}{\mB{Q}}
+\newcommand{\Z}{\mB{Z}}
+\newcommand{\N}{\mB{N}}
+\newcommand{\F}{\mB{F}}
+
 % vectors: bold, not arrow (but \arrowvec kept in case)
 \let\arrowvec\vec
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}} % include boldsymbol for Greek
@@ -67,6 +74,7 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\nullspace}{null}
+\DeclareMathOperator{\range}{range}
 \newcommand{\unitvec}[1]{\vec{\hat{#1}}}
 \newcommand{\ivec}{\unitvec{\textbf{\i}}}
 \newcommand{\jvec}{\unitvec{\textbf{\j}}}
@@ -159,6 +167,9 @@
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 
+% tuples: \tuple{1, 2} \in \mB R^2
+\newcommand{\tuple}[1]{\langle#1\rangle}
+
 % Swap the definitions of \abs* and \norm* with their respective starred
 % variants, so that \abs and \norm resize delimiters, and the starred variants
 % do not.
@@ -201,7 +212,10 @@
 
 % Set and function theory
 \newcommand\powerset{\mathcal{P}}
-\newcommand\unique{\mathrel{\exists!}}
+\newcommand\unique{\mathord{\exists!\,}}
 \newcommand\restrict[2]{\left.{#1}\right|_{#2}}
 \newcommand\inv{{-1}} % inverse function, as in f^\inv
 \newcommand\imf\underline % (pre)image function, as in \imf f : \powerset(A) \to \powerset(B)
+
+
+\newcommand{\rbinom}[2]{\binom{#1}{#2}_{\mathit{R}}}
