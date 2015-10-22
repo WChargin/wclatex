@@ -218,4 +218,19 @@
 \newcommand\imf\underline % (pre)image function, as in \imf f : \powerset(A) \to \powerset(B)
 
 
+
+%% Combinatorics
+% combinations with repetition
 \newcommand{\rbinom}[2]{\binom{#1}{#2}_{\mathit{R}}}
+% for number triangles like Pascal's, etc.
+\newenvironment{numtri}[1][\quad]{%
+  \begingroup%
+  %
+  % entry in a row
+  \def\e##1{#1\mathclap{##1}#1}%
+  %
+  % last entry in the triangle
+  \def\ee##1{\e{##1\mathrlap{.}}}%
+  %
+  \begin{equation*}\begin{gathered}%
+}{\end{gathered}\end{equation*}\endgroup}
