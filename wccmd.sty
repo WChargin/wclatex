@@ -39,6 +39,14 @@
   \newtheorem*{fact}{Fact}
   \newtheorem*{example}{Example}
   \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+  \let\old@maketitle\maketitle
+  \newif\if@wc@madetitle
+  \@wc@madetitlefalse
+  \renewcommand\maketitle{%
+    \if@wc@madetitle\else
+    \old@maketitle\@wc@madetitletrue\fi
+  }
+  \AtBeginDocument{\maketitle}
 }
 
 \newcommand{\taxon}[1]{\emph{#1}}
