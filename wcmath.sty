@@ -75,8 +75,9 @@
 \newcommand{\Wbl}{\@distribution@name{Weibull}} % Weibull
 
 % linear algebra
-\DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullspace}{null}
 \DeclareMathOperator{\range}{range}
 \newcommand{\unitvec}[1]{\vec{\hat{#1}}}
@@ -219,6 +220,7 @@
 \newcommand\unique{\mathord{\exists!\,}}
 \newcommand\restrict[2]{\left.{#1}\right|_{#2}}
 \newcommand\inv{{-1}} % inverse function, as in f^\inv
+\newcommand\op{{\mathrm{op}}} % opposite category, as in \Set^\op
 \newcommand\imf\underline % (pre)image function, as in \imf f : \powerset(A) \to \powerset(B)
 
 
@@ -238,3 +240,6 @@
   %
   \begin{equation*}\begin{gathered}%
 }{\end{gathered}\end{equation*}\endgroup}
+
+\newcommand\iso{\cong}
+\newcommand\niso{\ncong}
