@@ -3,6 +3,15 @@
 \RequirePackage{amsmath}
 \RequirePackage{graphicx}
 
+\RequirePackage{tikz}
+\usetikzlibrary{arrows}
+\RequirePackage{tikz-cd}
+\tikzset{
+  commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=stealth}
+}
+
 % category
 \newcommand{\cat}[1]{\mathsf{#1}}
 
