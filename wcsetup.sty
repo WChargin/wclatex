@@ -61,6 +61,12 @@
 \DeclareOption{no-lmodern}{\@wc@lmodernfalse}
 \ExecuteOptions{lmodern}
 
+% option to load Inconsolata (default: true)
+\newif\if@wc@inconsolata
+\DeclareOption{inconsolata}{\@wc@inconsolatatrue}
+\DeclareOption{no-inconsolata}{\@wc@inconsolatafalse}
+\ExecuteOptions{inconsolata}
+
 \ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,8 +75,8 @@
 
 % Font setup (some further packages rely on this)
 \RequirePackage[T1]{fontenc}
-\if@wc@lmodern{\RequirePackage{lmodern}}\fi
-\RequirePackage{zi4}
+\if@wc@lmodern\RequirePackage{lmodern}\fi
+\if@wc@inconsolata\RequirePackage{zi4}\fi
 
 % Load prerequisite packages, if any
 \if@wc@loadmath
