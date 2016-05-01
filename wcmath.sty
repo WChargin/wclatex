@@ -45,9 +45,9 @@
 \newcommand{\bigOmega}{\Omega}
 
 % statistics: expected value, variance, median
-\DeclareMathOperator{\expect}{E}
+\DeclareMathOperator{\expect}{\mathbb E}
 \DeclareMathOperator{\var}{Var}
-\DeclareMathOperator{\prob}{P}
+\DeclareMathOperator{\prob}{\Pr}
 \newcommand{\mean}{\bar}
 \newcommand{\widemean}{\overline}
 \newcommand{\median}{\tilde}
@@ -65,14 +65,16 @@
 
 % statistics: distributions
 \newcommand{\@distribution@name}[1]{\mathrm{#1}}
-\newcommand{\Exp}{\@distribution@name{Exp}} % exponential
-\newcommand{\Bin}{\@distribution@name{Bin}} % binomial
-\newcommand{\Pois}{\@distribution@name{Pois}} % Poisson
-\newcommand{\Nor}{\@distribution@name{\mathcal{N}}} % normal
+\newcommand{\Exp}{\@distribution@name{Exp}}             % exponential
+\newcommand{\Bin}{\@distribution@name{Bin}}             % binomial
+\newcommand{\Geom}{\@distribution@name{Geometric}}      % geometric
+\newcommand{\Bern}{\@distribution@name{Bernoulli}}      % Bernoulli
+\newcommand{\Pois}{\@distribution@name{Pois}}           % Poisson
+\newcommand{\Nor}{\@distribution@name{\mathcal{N}}}     % normal
 \newcommand{\Lgn}{\@distribution@name{Log}\text{-}\Nor} % lognormal
-\newcommand{\Unif}{\@distribution@name{\mathcal{U}}} % uniform
-\newcommand{\Chisq}{\@distribution@name{\chi}^2} % chi-squared
-\newcommand{\Wbl}{\@distribution@name{Weibull}} % Weibull
+\newcommand{\Unif}{\@distribution@name{\mathcal{U}}}    % uniform
+\newcommand{\Chisq}{\@distribution@name{\chi}^2}        % chi-squared
+\newcommand{\Wbl}{\@distribution@name{Weibull}}         % Weibull
 
 % linear algebra
 \DeclareMathOperator{\spn}{span}
