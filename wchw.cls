@@ -18,7 +18,7 @@
 \fi
 \RequirePackage{wcsetup}
 \if@usecode
-  \lstMakeShortInline|
+  \AtBeginDocument{\lstMakeShortInline|}
 \fi
 %
 % Environment for question prompts
