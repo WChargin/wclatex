@@ -67,6 +67,12 @@
 \DeclareOption{no-inconsolata}{\@wc@inconsolatafalse}
 \ExecuteOptions{inconsolata}
 
+% option to load bibLaTeX with personal source file (default: false)
+\newif\if@wc@biblatex
+\DeclareOption{wcbiblatex}{\@wc@biblatextrue}
+\DeclareOption{no-wcbiblatex}{\@wc@biblatexfalse}
+\ExecuteOptions{no-wcbiblatex}
+
 \ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,6 +117,12 @@
 \RequirePackage{microtype}
 \RequirePackage{xcolor}
 \RequirePackage{booktabs}
+
+% bibLaTeX, if desired
+\if@wc@biblatex
+  \RequirePackage[backend=biber]{biblatex}
+  \addbibresource{wcsources.bib}
+\fi
 
 % varioref, hyperref, cleveref
 \RequirePackage{varioref}
