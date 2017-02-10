@@ -180,15 +180,6 @@
 % tuples: \tuple{1, 2} \in \mB R^2
 \newcommand{\tuple}[1]{\langle#1\rangle}
 
-% Swap the definitions of \abs* and \norm* with their respective starred
-% variants, so that \abs and \norm resize delimiters, and the starred variants
-% do not.
-\let\old@abs\abs
-\def\abs{\@ifstar{\old@abs}{\old@abs*}}
-
-\let\old@norm\norm
-\def\norm{\@ifstar{\old@norm}{\old@norm*}}
-
 % Propositional logic:
 % switch implies, iff, etc. from ==> to --> style arrows
 \newif\if@propositionallogic
